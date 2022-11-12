@@ -1,0 +1,24 @@
+version: '3.4'
+
+volumes:
+  web_data:
+    name: indimin_datavolume
+
+services:
+  sqldb:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+        - SA_PASSWORD=2Secure*Password2
+        - ACCEPT_EULA=Y
+    ports:
+        - "1440:1433"
+  indimin.webapi:
+    image: ${DOCKER_REGISTRY-}indiminwebapi
+    build:
+      context: .
+      dockerfile: src/Indimin.WebApi/Dockerfile
+    depends_on:
+        - sqldb
+    volumes:
+        - web_data:/var/opt/mssql
+  
