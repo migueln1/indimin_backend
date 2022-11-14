@@ -1,4 +1,5 @@
-﻿using Indimin.Infrastructure;
+﻿using Indimin.Application.Citizens;
+using Indimin.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -10,6 +11,8 @@ public static class ApplicationModule
             this IServiceCollection services, IConfiguration config)
     {
         services.AddInfrastructureConfig(config);
+        services.AddTransient<ICitizenService, CitizenService>();
+
         return services;
     }
 }

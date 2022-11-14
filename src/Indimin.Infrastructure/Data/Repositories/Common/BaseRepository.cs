@@ -35,7 +35,7 @@ namespace Indimin.Infrastructure.Data.Repositories.Common
             }
         }
 
-        public async Task<T> TryEditAsync(T entity, CancellationToken ct)
+        public async Task<T> TryUpdateAsync(T entity, CancellationToken ct)
         {
             _context.Update(entity);
             await _context.SaveChangesAsync(ct);
